@@ -1,0 +1,17 @@
+spring:
+   datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://35.200.101.90:3306/hyun
+      username: hyun
+      password: hyun1234
+   mvc:
+      view:
+          prefix: /WEB-INF/views/
+          suffix: .jsp
+      static-path-pattern: /resources/**
+
+mybatis: 
+  type-aliases-package: com.spring.yagaza.web.domain
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+    default-statement-timeout: 120
