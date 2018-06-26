@@ -33,7 +33,7 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
 	//타임리프 추가
-	//compile ('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile ('org.springframework.boot:spring-boot-starter-thymeleaf')
 	
 	// spring boot 에서 jsp를 사용하기 위한
     compile('javax.servlet:jstl:1.2')

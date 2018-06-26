@@ -7,7 +7,7 @@ spring:
    mvc:
       view:
           prefix: /WEB-INF/views/
-          suffix: .jsp
+          suffix: .html
       static-path-pattern: /resources/**
 
 mybatis: 
