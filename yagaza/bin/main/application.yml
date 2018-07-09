@@ -1,9 +1,9 @@
 spring:
    datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://35.200.101.90:3306/hyun
-      username: hyun
-      password: hyun1234
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://lisanstudy.c5sc7zsexlq4.ap-northeast-2.rds.amazonaws.com:3306/innodb
+      username: LisanStudy
+      password: 1san1san
    mvc:
       view:
           prefix: /WEB-INF/views/
