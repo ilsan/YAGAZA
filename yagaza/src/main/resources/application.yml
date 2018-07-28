@@ -4,11 +4,11 @@ spring:
       url: jdbc:mysql://lisanstudy.c5sc7zsexlq4.ap-northeast-2.rds.amazonaws.com:3306/innodb
       username: LisanStudy
       password: 1san1san
+      
    mvc:
-      view:
-          prefix: /WEB-INF/views/
-          suffix: .html
       static-path-pattern: /resources/**
+   thymeleaf:
+    cache: false
 
 mybatis: 
   type-aliases-package: com.spring.yagaza.web.domain

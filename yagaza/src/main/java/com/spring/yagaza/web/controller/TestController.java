@@ -15,10 +15,9 @@ public class TestController {
 	private TestService test;
 	
 	@RequestMapping("/")
-	@ResponseBody
 	public String test(Model model){
 		model.addAttribute("list",test.List());
-		return "test";
+		return "index";
 
 	}
 }

@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class testVo {
 	
-	private int seq;
-	private String test;
-
+	private int testNo;
+	private String testCtnt;
 }

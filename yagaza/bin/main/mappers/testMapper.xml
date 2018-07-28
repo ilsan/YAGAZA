@@ -3,9 +3,11 @@
 <mapper namespace="com.spring.yagaza.web.repository.TestRepository">
 
 <select id="List" resultType="testVo">
-	SELECT * 
-			FROM
-			test
+
+SELECT TEST_NO as  testNo
+	,	TEST_CTNT  as testCtnt
+  FROM TEST
+		 
 </select>
 
 </mapper>
