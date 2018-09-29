@@ -1,7 +1,7 @@
 spring:
    datasource:
-      driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://lisanstudy.c5sc7zsexlq4.ap-northeast-2.rds.amazonaws.com:3306/innodb
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      url: jdbc:log4jdbc:mysql://lisanstudy.c5sc7zsexlq4.ap-northeast-2.rds.amazonaws.com:3306/innodb
       username: LisanStudy
       password: 1san1san
       
@@ -16,4 +16,6 @@ mybatis:
   configuration:
     default-statement-timeout: 120
     map-underscore-to-camel-case: true
+    
+
     

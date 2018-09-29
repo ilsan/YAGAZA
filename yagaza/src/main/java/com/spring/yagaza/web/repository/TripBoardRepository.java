@@ -11,6 +11,17 @@ import com.spring.yagaza.web.domain.TripBoard;
 @Repository
 public interface TripBoardRepository {
 	
+	/**
+	 * 여행게시판 목록 조회하기
+	 * @return
+	 */
 	public List<TripBoard> findByBoardList();
+
+	/**
+	 * 여행게시판 상세페이지
+	 * @param tripBoardNo
+	 * @return
+	 */
+	public TripBoard findByBoardDetail(String tripBoardNo);
 
 }

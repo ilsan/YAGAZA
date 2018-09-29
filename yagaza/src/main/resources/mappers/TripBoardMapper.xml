@@ -2,11 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.yagaza.web.repository.TripBoardRepository">
 
-<select id="findByBoardList" resultType="TripBoard">
+	<!-- 여행게시판 목록 조회하기 -->
+	<select id="findByBoardList" resultType="TripBoard">
+	  SELECT TRIP_BOARD_NO
+			,TITLE
+			,CASE WHEN LENGTH(CONTENT) > 390 THEN CONCAT(LEFT(CONTENT,390/3),'...') ELSE CONTENT END AS CONTENT
+			,LIKE_CNT
+			,HIT_CNT
+			      ,USE_YN
+			,REG_USER
+			,DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE
+			,UPD_USER 
+			,UPD_DATE
+	    FROM TRIP_BOARD
+	   WHERE USE_YN = 'Y'
+	   ORDER BY TRIP_BOARD_NO DESC
+	</select>
 
- SELECT *
-   FROM TRIP_BOARD
-		 
-</select>
+	
+	<!-- 여행게시판 상세페이지 -->
+	<select id="findByBoardDetail" parameterType="String" resultType="TripBoard">
+	  SELECT TRIP_BOARD_NO
+			,TITLE
+			,CONTENT
+			,LIKE_CNT
+			,HIT_CNT
+			,USE_YN
+			,REG_USER
+			,DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE
+			,UPD_USER 
+			,UPD_DATE
+	    FROM TRIP_BOARD
+	   WHERE USE_YN = 'Y'
+	     AND TRIP_BOARD_NO = #{tripBoardNo}
+	</select>
 
 </mapper>

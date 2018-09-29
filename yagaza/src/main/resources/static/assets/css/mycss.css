@@ -1,0 +1,31 @@
+/*
+=============================
+2018.09.30
+작성자 : 배재현
+
+(신규일시 아래는 미작성, 이미 적용중인 css변경시 아래 작성. 계속 이어서)
+수정일 :
+수정자 :
+수정내역 :  
+=============================
+ */
+ 
+/* text order By */
+.tripB-float-left{ float: left; }
+.tripB-float-right{ float: right; }
+.tripB-text-center{ text-align: center;}
+
+/* margin & padding*/
+.tripB-margin-top10{ margin-top: 10px;}
+.tripB-margin-top15{ margin-top: 15px;}
+.tripB-margin-top20{ margin-top: 20px;}
+.tripB-margin-top25{ margin-top: 25px;}
+.tripB-margin-top30{ margin-top: 30px;}
+.tripB-padding{	padding: 40px 35px 30px 35px; }
+
+/* font */
+.tripB-bold { font-weight: bold;}
+.tripB-font-size25 { font-size: 25px;}
+.tripB-font-size40 { font-size: 40px;}
+.tripB-color666 { color: #666;}
+.gtco-container{ font-family: 'Noto Sans KR', NanumGothic,'나눔고딕',sans-serif; }

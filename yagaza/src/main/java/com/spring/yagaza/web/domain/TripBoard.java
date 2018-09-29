@@ -20,6 +20,9 @@ public class TripBoard {
 	/** 조회 수 */
 	private int hitCnt;
 
+	/** 사용여부 ( default = 'Y' */
+	private String useYn;
+	
 	/** 등록자 */
 	private Integer regUser;
 

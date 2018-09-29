@@ -15,9 +15,20 @@ public class TripBoardServiceImpl implements TripBoardService {
 	@Autowired
 	private TripBoardRepository boardRepository;
 
+	/**
+	 * 여행게시판 목록 조회하기
+	 */
 	@Override
 	public List<TripBoard> findByBoardList() {
 		return boardRepository.findByBoardList();
+	}
+
+	/**
+	 * 여행게시판 상세페이지
+	 */
+	@Override
+	public TripBoard findByBoardDetail(String tripBoardNo) {
+		return boardRepository.findByBoardDetail(tripBoardNo);
 	}
 	
 

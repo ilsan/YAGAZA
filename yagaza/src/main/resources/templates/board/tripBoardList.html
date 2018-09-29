@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="../resources/assets/css/style.css">
+<link rel="stylesheet" href="../resources/assets/css/mycss.css">
+
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body> 
+
+<div class="gtco-container">
+	<div class="row">
+	         <div th:if="${#lists.size(tripBoardList) > 0}" th:each=" list : ${tripBoardList}">
+	            <a class="fh5co-card-item tripB-padding" th:href="@{/board/view(tripBoardNo=${list.tripBoardNo})}">
+	               <figure>
+		                  <div>
+		                  	<span class="tripB-float-left">카테고리 > 국내 > 제주도</span> <!-- 추후 카테고리 생성시 갖고오도록. -->
+		                  	<span class="tripB-float-right" th:text="'조회수 : ' + ${list.hitCnt} + ' | ' + '추천수 : ' + ${list.likeCnt}"></span>
+		                  </div>
+		                  <br/>
+		                  <div>
+		                  	<span class="tripB-float-left" th:text="${list.regDate}" >YYYY-MM-DD</span>
+<!-- 		                  	<span class="tripB-float-right" th:text="${list.regUser}">글쓴이 : 홍길동</span> -->
+		                  	<span class="tripB-float-right" >글쓴이 : 홍길동</span> <!-- 추후 유저테이블 완성되면 join해서 갖고오자. 그 다음 위 주석 해제, 요줄은 삭제  -->
+		                  </div>
+	                  	  <br/>
+	                  	  <div class="tripB-bold tripB-font-size40" th:text="${list.title}">
+	  						제목부. 23자
+	                  	  </div>
+	                  	  <div class="tripB-font-size25 tripB-color666" th:text="${list.content}">
+	                  	  	내용부. 129자 + ...(3자) = 131자 
+	                  	  </div>
+	               </figure>
+	               <div class="fh5co-text">
+	                  <p><span class="btn btn-primary">내용 보기</span></p>
+	               </div>
+	            </a>
+	         </div>
+	         <div class="tripB-text-center" th:unless="${#lists.size(tripBoardList) > 0}">
+	         	등록된 글이 없습니다.
+	         </div>
+	</div>
+</div>
+
+</body>
+</html>
