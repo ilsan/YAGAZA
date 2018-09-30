@@ -14,6 +14,8 @@
 .tripB-float-left{ float: left; }
 .tripB-float-right{ float: right; }
 .tripB-text-center{ text-align: center;}
+.tripB-text-left{ text-align: left;}
+.tripB-text-right{ text-align: right;}
 
 /* margin & padding*/
 .tripB-margin-top10{ margin-top: 10px;}
@@ -21,7 +23,12 @@
 .tripB-margin-top20{ margin-top: 20px;}
 .tripB-margin-top25{ margin-top: 25px;}
 .tripB-margin-top30{ margin-top: 30px;}
+.tripB-margin-bottom10{ margin-bottom: 10px;}
+.tripB-margin-bottom15{ margin-bottom: 15px;}
+.tripB-margin-bottom20{ margin-bottom: 20px;}
+.tripB-margin-bottom25{ margin-bottom: 25px;}
 .tripB-padding{	padding: 40px 35px 30px 35px; }
+.tripB-padding2{	padding: 20px 20px 10px 20px; }
 
 /* font */
 .tripB-bold { font-weight: bold;}
@@ -29,3 +36,22 @@
 .tripB-font-size40 { font-size: 40px;}
 .tripB-color666 { color: #666;}
 .gtco-container{ font-family: 'Noto Sans KR', NanumGothic,'나눔고딕',sans-serif; }
+
+/* board-detail title & content */
+.tripBD-title{
+			    background-color: #f9f9f9;
+			    padding: 20px 40px;
+			    border-top: 2px solid #333;
+			    border-bottom: 1px solid #dedede;
+			 }
+.tripBD_content{
+				min-height: 600px;
+				padding: 20px 40px;
+				border-bottom: 1px solid #dedede;
+				}
+
+/* over cursor */
+.cursor-hand{ cursor: pointer; }
+.none-underline{ !important text-decoration:none; }
+
+

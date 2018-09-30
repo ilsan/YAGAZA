@@ -27,4 +27,9 @@ public class TripBoardController {
 		model.addAttribute("tripBoardDetail", tripBoardService.findByBoardDetail(tripBoardNo));
 		return "board/tripBoardView";
 	}
+	
+	@RequestMapping("/board/write")
+	public String write(Model model){
+		return "board/tripBoardWrite";
+	}
 }

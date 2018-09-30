@@ -10,14 +10,24 @@
 </head>
 <body> 
 
+		
 <div class="gtco-container">
+
+	<div class="tripB-text-right tripB-margin-bottom25">
+		<a style="text-decoration: none;"  href="/board/write">
+			<span class="btn btn-primary">
+				글쓰기.
+			</span>
+		</a>
+	</div>
+
 	<div class="row">
 	         <div th:if="${#lists.size(tripBoardList) > 0}" th:each=" list : ${tripBoardList}">
-	            <a class="fh5co-card-item tripB-padding" th:href="@{/board/view(tripBoardNo=${list.tripBoardNo})}">
+	            <a class="fh5co-card-item tripB-padding2" style="text-decoration: none;" th:href="@{/board/view(tripBoardNo=${list.tripBoardNo})}">
 	               <figure>
 		                  <div>
 		                  	<span class="tripB-float-left">카테고리 > 국내 > 제주도</span> <!-- 추후 카테고리 생성시 갖고오도록. -->
-		                  	<span class="tripB-float-right" th:text="'조회수 : ' + ${list.hitCnt} + ' | ' + '추천수 : ' + ${list.likeCnt}"></span>
+		                  	<span class="tripB-float-right" th:text="'조회수 : ' + ${list.hitCnt} + '  |  ' + '추천수 : ' + ${list.likeCnt}"></span>
 		                  </div>
 		                  <br/>
 		                  <div>

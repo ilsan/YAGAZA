@@ -235,7 +235,8 @@ th {
 
   a,
   a:visited {
-    text-decoration: underline;
+/*     text-decoration: underline; */
+    text-decoration: none !important;
   }
 
   a[href]:after {
