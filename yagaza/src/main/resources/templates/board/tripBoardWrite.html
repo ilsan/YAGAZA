@@ -22,8 +22,42 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	  $('#summernote').summernote();
-	});
+	
+	$('#summernote').summernote({
+		height : 350,
+		minHeight : null,
+		maxHeight : null,
+		focus : true,
+		lang : 'ko-KR',
+		//placeholder: '내용을 입력하세요.',
+		callbacks : {
+			onImageUpload : function(files, editor, welEditable) {
+				sendFile(files[0],editor,welEditable); 
+			}
+		}
+	}); // end of summernote ---
+	
+}); //end of document.ready ------
+
+function sendFile(file,editor,welEditable) {
+
+	data = new FormData();
+	data.append("uploadFile", file);
+	data.append("categoryCode","2000");
+	$.ajax({
+	    data: data,
+	    type: "POST",
+	    url: '/fileUpload/img',
+	    cache: false,
+	    contentType: false,
+	    processData: false,
+	    success: function(url) {
+	        alert(url);
+	        $('#summernote').summernote('editor.insertImage', url);
+	    }
+	}); // end of ajax ---
+}// end of sendFile ------
+
 
 </script>
 
