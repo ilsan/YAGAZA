@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>회원가입</title>
+
+<script src="resources/assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		//중복체크
+		$("#submit").click(function() {
+			var idresult = $("#id").val();
+			var name = $("#name").val();
+			var passresult = $("#password").val();
+			var userPwdCheck = $("#userPwdCheck").val(); //password확인값
+		
+			var checked = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{3,}$/;  //닉네임 조건문: 영문,숫자포함 3글자 이상
+			// 비밀번호 조건문 : 영문,숫자,특문포함, 6글자 이상
+			var passchecked = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/; 
+			
+			if(!checked.test(idresult)) {
+				alert("닉네임은 영문으로 시작하며,숫자를포함, 3글자 이상이여야 합니다.");
+				$(".id").focus();
+				return false;
+			}else if(!passchecked.test(passresult)){ // 비밀번호가 조건에 맞지 않으면
+				alert("비밀번호는 영문,숫자,특문 포함 6글자 이상입니다.")
+				$(".password").focus(); //비밀번호 입력공간에 포커싱
+				return false; //form submit 막음 
+			}else if(passresult != userPwdCheck){
+				alert("비밀번호가 일치하지 않습니다.");
+				$(".userPwdCheck").focus();
+				return false;
+			}
+		})
+	});
+	
+	function selectEmail(){
+		document.getElementById("userEmail2").value = document.getElementById("userEmail3").value;
+	}
+</script>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<form action="joinSuccess" method="post"
+		onsubmit="return join_check()">
+		<table border=0>
+			<tr>
+				<th>필수입력사항</th>
+				<td></td>
+			</tr>
+
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="name" required maxlength="10">
+				</td>
+			</tr>
+			<tr>
+				<th>닉네임</th>
+				<td><input type="text" name="id" id="id">
+				<input type="button" id="idCheck" value="중복체크">
+				</td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" name="password" id="password">
+					(영문 대소문자/숫자/특수문자포함 10자~16자)</td>
+			</tr>
+			<tr>
+				<th>비밀번호 확인</th>
+				<td><input type="password" name="userPwdCheck"
+					id="userPwdCheck"></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><input name="email" id="email" required>
+					@ <input name="userEmail2" id="userEmail2" required> <select
+					id="userEmail3" onchange="selectEmail()">
+						<option value="" selected="selected">-이메일 선택-</option>
+						<option value="naver.com">naver.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="nate.com">nate.com</option>
+						<option value="hotmail.com">hotmail.com</option>
+						<option value="yahoo.com">yahoo.com</option>
+						<option value="empas.com">empas.com</option>
+						<option value="korea.com">korea.com</option>
+						<option value="dreamwiz.com">dreamwiz.com</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="">직접입력</option>
+				</select></td>
+			</tr>
+
+		</table>
+		<div style="text-align: left; padding-bottom: 15px;">
+			<input type="submit" value="회원가입" id="submit"> <input
+				type="button" value="취소">
+		</div>
+
+	</form>
+	<!--  본문 끝 -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="l-box">
+		<h2 class="content_title">회원가입</h2>
+		<p style="margin-top: -1em">
+			<span style="color: red">*</span>표시는 필수입력사항 입니다.
+		</p>
+
+		<p style="color: red; font-size: 0.9em">
+			<span class="basic-button button-xsmall red">중요공지</span> 여행사의 여행상품,
+			패키지상품 등 기타 상업적인 목적의 이용은 금지사항 입니다. 위반시 경고없이 탈퇴 될 수 있습니다.
+		</p>
+
+		<form name="MemberJoinForm" id="MemberJoinForm" method="post"
+			action="member_join_ok.php" class="pure-form" autocomplete="off">
+			<input type="hidden" name="nick_is"> <input type="hidden"
+				name="interest_cunt" value=""> <input type="hidden"
+				name="my_hobby" value="">
+			<h3>
+				<span style="color: red">*</span>필수입력
+			</h3>
+			<table width="100%"
+				class="pure-table pure-table-horizontal mobile_table">
+				<tbody>
+					<tr>
+						<td width="180" class="td_title">닉네임<span style="color: red">*</span></td>
+						<td><input type="text" name="user_name" value=""> <input
+							type="button" value="중복검사" onclick="chk_nick2();"
+							class="pure-button button-small"> <sub>* 닉네임은 3개월에
+								한번만 수정할 수 있습니다.</sub></td>
+					</tr>
+					<tr>
+						<td class="td_title">e-mail<span style="color: red">*</span></td>
+						<td><input type="text" name="email" value=""></td>
+					</tr>
+					<tr>
+						<td class="td_title">패스워드<span style="color: red">*</span></td>
+						<td><input type="password" name="user_pass" value=""></td>
+					</tr>
+					<tr>
+						<td width="180" class="td_title">성별<span style="color: red">*</span></td>
+						<td><input type="radio" name="sex" id="radio" value="m">
+							남자&nbsp;&nbsp;&nbsp;<input type="radio" name="sex" id="radio"
+							value="f"> 여자</td>
+					</tr>
+					<tr>
+						<td class="td_title">생년월<span style="color: red">*</span></td>
+						<td><input type="number" name="birth_y" value="" size="4"
+							onkeyup="this.value=number_filter(this.value);"> <select
+							name="birth_m">
+								<option value="">월</option>
+								<option value="01">01월</option>
+								<option value="02">02월</option>
+								<option value="03">03월</option>
+								<option value="04">04월</option>
+								<option value="05">05월</option>
+								<option value="06">06월</option>
+								<option value="07">07월</option>
+								<option value="08">08월</option>
+								<option value="09">09월</option>
+								<option value="10">10월</option>
+								<option value="11">11월</option>
+								<option value="12">12월</option>
+						</select></td>
+					</tr>
+
+					<tr>
+						<td class="td_title">약관동의<span style="color: red">*</span></td>
+						<td valign="middle">
+							<div style="margin-top: 0.5em;">
+								<input type="checkbox" id="chk_ok" name="chk_ok" value="1">
+								<label for="chk_ok" style="display: inline; font-size: 0.9em;">가입시
+									<a target="_blank" href="policy.php"
+									class="basic-button space radius button-small">이용약관</a> 과 <a
+									target="_blank" href="privacy.php"
+									class="basic-button space radius button-small">개인정보 취급방침</a>을
+									확인하고 이에 동의합니다.
+								</label>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<h3>선택입력</h3>
+			<table width="100%"
+				class="pure-table pure-table-horizontal mobile_table">
+				<tbody>
+					<tr>
+						<td class="td_title">동행찾기<br>
+						<span style="font-size: 0.8em">(선택사항)</span></td>
+						<td valign="middle">
+							<div>
+								<input type="checkbox" id="interest_ok" name="interest_ok"
+									value="1"> <label for="interest_ok"
+									style="display: inline; font-size: 0.9em;">아래 설정된 나라에
+									관심있는 회원에게 쪽지 수신허용</label>
+							</div>
+
+							<div>
+								<select name="cont" style="width: 10em" id="sel_country1"
+									onchange="sel_cont(this.value);">
+									<option value="">대륙선택</option>
+									<option value="East Asia">동아시아</option>
+									<option value="Southeast Asia">동남아시아</option>
+									<option value="Central Asia">중앙아시아</option>
+									<option value="West Asia">서아시아</option>
+									<option value="Southern Asia">남아시아</option>
+									<option value="Eastern Europe">동유럽</option>
+									<option value="Western Europe">서유럽</option>
+									<option value="Southern Europe">남유럽</option>
+									<option value="North Europe">북유럽</option>
+									<option value="Central America">중앙아메리카</option>
+									<option value="North America">북아메리카</option>
+									<option value="South America">남아메리카</option>
+									<option value="East Africa">동아프리카</option>
+									<option value="West Africa">서아프리카</option>
+									<option value="South Africa">남아프리카</option>
+									<option value="North Africa">북아프리카</option>
+									<option value="Central Africa">중앙아프리카</option>
+									<option value="Oceania">오세아니아</option>
+								</select> <select name="country"
+									style="width: 10em; display: inline-block; margin: 0;"
+									id="sel_country2">
+									<option value="">국가선택</option>
+								</select> <input type="button" value="선택" onclick="sel_countrys();"
+									class="pure-button button-small">
+							</div>
+							<div id="countrys" style="margin-top: 5px"></div>
+							<div>
+								<span style="font-size: 0.9em">위 관심국가는 여러개 선택가능합니다.</span>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td class="td_title">취미<br>
+						<span style="font-size: 0.8em">(선택사항)</span></td>
+						<td>
+							<div>
+								<input type="checkbox" id="hobby_ok" name="hobby_ok" value="1">
+								<label for="hobby_ok" style="display: inline; font-size: 0.9em;">아래
+									취미에 관한 소모임의 쪽지 수신허용</label>
+							</div>
+							<div>
+								<select name="hobby" id="hobby_sel"
+									onchange="sel_hobby(this.form);">
+									<option value="">취미선택</option>
+									<option value="국내여행">국내여행</option>
+									<option value="해외여행">해외여행</option>
+									<option value="캠핑">캠핑</option>
+									<option value="등산">등산</option>
+									<option value="낚시">낚시</option>
+									<option value="자전거">자전거</option>
+									<option value="수상레져">수상레져</option>
+									<option value="스키">스키</option>
+									<option value="hobby_etc">직접입력</option>
+								</select> <input type="text" name="hobby_name" id="hobby_id" value=""
+									style="display: none"> <input type="button" value="선택"
+									onclick="sel_hobbys();" class="pure-button button-small">
+							</div>
+							<div id="hobbys" style="margin-top: 5px"></div>
+							<div>
+								<span style="font-size: 0.9em">취미는 5개까지 선택 또는 입력 가능합니다.</span>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</form>
+	</div>
+
+</body>
+</html>
