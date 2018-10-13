@@ -6,6 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileService {
     ImgFile store(MultipartFile file) throws Exception;
 
-    ImgFile load(String id) throws Exception;
+    ImgFile load(int id) throws Exception;
 
 }

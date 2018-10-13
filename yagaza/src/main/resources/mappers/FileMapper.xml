@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.yagaza.web.repository.FileRepository">
 
-    <insert id="findByFileName" parameterType="ImgFile">
+    <insert id="saveFile" useGeneratedKeys="true" keyProperty="fileNo" parameterType="ImgFile">
         INSERT INTO File
             (file_Org_Nm,
             file_Save_Nm,
@@ -21,8 +21,19 @@
             now())
     </insert>
 
-    <select id="findByFile" parameterType="String" resultType="ImgFile">
-        SELECT file_no, file_Org_Nm, file_Save_Nm, file_Dir, file_Size file_Ext, file_Category, reg_Date, memo FROM File;
+    <select id="findByFileNo" parameterType="int" resultType="ImgFile">
+        SELECT
+            file_no,
+            file_Org_Nm,
+            file_Save_Nm,
+            file_Dir,
+            file_Size,
+            file_Ext,
+            file_Category,
+            reg_Date,
+            memo
+        FROM File
+        WHERE file_no = #{fileId}
     </select>
 
 </mapper>

@@ -117,7 +117,8 @@ public class CommonController {
 
         try {
             ImgFile uploadedFile = fileService.store(file);
-            return ResponseEntity.ok().body("/fileUpload/image/" + uploadedFile.getFileSaveNm());
+            System.out.println(uploadedFile.toString());
+            return ResponseEntity.ok().body("/fileUpload/image/" + uploadedFile.getFileNo());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
@@ -126,15 +127,15 @@ public class CommonController {
 
     @GetMapping("/fileUpload/image/{fileId}")
     @ResponseBody
-    public ResponseEntity<?> serveFile(@PathVariable String fileId) {
+    public ResponseEntity<?> serveFile(@PathVariable int fileId) {
         try {
             ImgFile uploadedFile = fileService.load(fileId);
             HttpHeaders headers = new HttpHeaders();
 
-            Resource resource = new UrlResource(Paths.get(uploadedFile.getFileDir()).toUri());
+            Resource resource = new UrlResource(Paths.get(uploadedFile.getFileDir(), uploadedFile.getFileSaveNm()).toUri());
             String fileName = uploadedFile.getFileOrgNm();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
-            headers.setContentType(MediaType.valueOf(uploadedFile.getContentType()));
+            headers.setContentType(MediaType.valueOf(uploadedFile.getFileExt()));
            /* if (MediaUtils.containsImageMediaType(uploadedFile.getContentType())) {
                 headers.setContentType(MediaType.valueOf(uploadedFile.getContentType()));
             } else {

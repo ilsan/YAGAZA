@@ -26,14 +26,14 @@ public class FileServiceImpl implements FileService {
         String uploadPath = "C:\\STUDY\\temp\\dir";
         Path rootLocation = Paths.get(uploadPath);
 
-        Resource resource = new UrlResource(Paths.get(uploadPath).toUri());
-
         try {
             if (file.isEmpty()) {
                 throw new Exception("Failed to store empty file " + file.getOriginalFilename());
             }
 
             String saveFileName = FileUploadUtil.fileSave(rootLocation.toString(), file);
+
+            Resource resource = new UrlResource(Paths.get(uploadPath + File.separator + saveFileName).toUri());
 
             if (saveFileName.toCharArray()[0] == '/') {
                 saveFileName = saveFileName.substring(1);
@@ -58,8 +58,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public ImgFile load(String id) throws Exception {
-        ImgFile file = fileRepository.findByFileName(id);
+    public ImgFile load(int id) throws Exception {
+        ImgFile file = fileRepository.findByFileNo(id);
         return file;
     }
 }
