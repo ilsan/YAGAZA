@@ -8,6 +8,7 @@ public class ImgFile {
 	private String fileOrgNm;
 	private String fileSaveNm;
 	private String fileDir;
+	private String contentType;
 	private long fileSize;
 	private String fileExt;
 	private String fileCategory;

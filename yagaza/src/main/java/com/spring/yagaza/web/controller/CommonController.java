@@ -1,24 +1,34 @@
 package com.spring.yagaza.web.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.spring.yagaza.web.domain.ImgFile;
+import com.spring.yagaza.web.service.FileService;
+import com.sun.media.jfxmediaimpl.MediaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.spring.yagaza.web.domain.ImgFile;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class CommonController {
+
+    @Autowired
+    private FileService fileService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
 	
@@ -100,4 +110,42 @@ public class CommonController {
 		}		
 		return HttpStatus.OK;
 	}
+
+    @PostMapping("/fileUpload/image")
+    @ResponseBody
+    public ResponseEntity<?> handleFileUpload(@RequestParam("uploadFile") MultipartFile file) {
+
+        try {
+            ImgFile uploadedFile = fileService.store(file);
+            return ResponseEntity.ok().body("/fileUpload/image/" + uploadedFile.getFileSaveNm());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/fileUpload/image/{fileId}")
+    @ResponseBody
+    public ResponseEntity<?> serveFile(@PathVariable String fileId) {
+        try {
+            ImgFile uploadedFile = fileService.load(fileId);
+            HttpHeaders headers = new HttpHeaders();
+
+            Resource resource = new UrlResource(Paths.get(uploadedFile.getFileDir()).toUri());
+            String fileName = uploadedFile.getFileOrgNm();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+            headers.setContentType(MediaType.valueOf(uploadedFile.getContentType()));
+           /* if (MediaUtils.containsImageMediaType(uploadedFile.getContentType())) {
+                headers.setContentType(MediaType.valueOf(uploadedFile.getContentType()));
+            } else {
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            }*/
+
+            return ResponseEntity.ok().headers(headers).body(resource);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

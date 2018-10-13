@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="../resources/assets/css/style.css">
+<link rel="stylesheet" href="../resources/assets/css/mycss.css">
+
+<head>
+
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+    <meta charset="utf-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#summernote').summernote({
+                height: 350,
+                minHeight: null,
+                maxHeight: null,
+                focus: true,
+                lang: 'ko-KR',
+                //placeholder: '내용을 입력하세요.',
+                callbacks: {
+                    onImageUpload: function (files, editor, welEditable) {
+                        /*sendFile(files[0], editor, welEditable);*/
+                        //for (var i = files.length - 1; i >= 0; i--) {
+                            sendFile(files[0], this);
+                        //}
+                    }
+                }
+            }); // end of summernote ---
+
+        }); //end of document.ready ------
+
+        function sendFile(file,el) {
+
+            data = new FormData();
+            data.append("uploadFile", file);
+            data.append("categoryCode","2000");
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: '/fileUpload/image',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(url) {
+                    /*alert(url);
+                    $('#summernote').summernote('editor.insertImage', url);*/
+                    $(el).summernote('editor.insertImage', url);
+                    /*$('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');*/
+                }
+            }); // end of ajax ---
+        }// end of sendFile ------
+    </script>
+</head>
+<body>
+<div class="gtco-section">
+    <div class="gtco-container">
+        <div class="container">
+            <form id="imgBoardForm" role="form" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="summernote" class="form-control" name="content">
+                    </textarea>
+                </div>
+                <button type="submit" class="btn btn-primary pull-right">확인</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="imageBoard">
+
+</div>
+</body>
+</html>
