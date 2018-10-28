@@ -2,7 +2,6 @@ package com.spring.yagaza.web.controller;
 
 import com.spring.yagaza.web.domain.ImgFile;
 import com.spring.yagaza.web.service.FileService;
-import com.sun.media.jfxmediaimpl.MediaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +43,11 @@ public class CommonController {
         Date now = new Date();
         String strDate = sdf.format(now);
 
-        String originalFileName = file.getOriginalFilename();  //실제파일명
-        String ext = originalFileName.substring(originalFileName.lastIndexOf('.')); // 확장자
-        String saveFileName = strDate+ext; // 저장파일명
+        String originalFileName = file.getOriginalFilename();  //�떎�젣�뙆�씪紐�
+        String ext = originalFileName.substring(originalFileName.lastIndexOf('.')); // �솗�옣�옄
+        String saveFileName = strDate+ext; // ���옣�뙆�씪紐�
         
-		//로컬 이미지업로드경로 설정 // TODO: 추후 경로 변경해야합니다. 또, 경로같은 정보들은 properties나, 다른 방법으로 한곳에서 관리하도록 합시다.
+		//濡쒖뺄 �씠誘몄��뾽濡쒕뱶寃쎈줈 �꽕�젙 // TODO: 異뷀썑 寃쎈줈 蹂�寃쏀빐�빞�빀�땲�떎. �삉, 寃쎈줈媛숈� �젙蹂대뱾�� properties�굹, �떎瑜� 諛⑸쾿�쑝濡� �븳怨녹뿉�꽌 愿�由ы븯�룄濡� �빀�떆�떎.
 		String path = "/upload/img";
 		String realPath = "C:/Users/ShipJH/Pictures/imgUpload" + path;
 		logger.info("realPath >> " + realPath + path);
@@ -58,11 +57,11 @@ public class CommonController {
             dir.mkdirs();
         }
         
-        logger.debug("실제파일명 :" + originalFileName);
-        logger.debug("저장파일명 :" + saveFileName);
-        logger.debug("파일 크기 :" + file.getSize());
-        logger.debug("파일 타입 :" + file.getContentType());
-        logger.debug("파일 확장자 : " + ext);
+        logger.debug("�떎�젣�뙆�씪紐� :" + originalFileName);
+        logger.debug("���옣�뙆�씪紐� :" + saveFileName);
+        logger.debug("�뙆�씪 �겕湲� :" + file.getSize());
+        logger.debug("�뙆�씪 ���엯 :" + file.getContentType());
+        logger.debug("�뙆�씪 �솗�옣�옄 : " + ext);
         
         if(!(".jpg".equals(ext.toLowerCase()) || ".png".equals(ext.toLowerCase()) || ".jpeg".equals(ext.toLowerCase()))) {
             logger.error("[error] >> filename extension is not jpg, jpeg, png");
@@ -85,7 +84,7 @@ public class CommonController {
             imgVo.setFileCategory(categoryCode);
             
 //            service.insertFileInfo(imgVo);
-// 			  TODO: 디비 insert 추가.
+// 			  TODO: �뵒鍮� insert 異붽�.
         }
 		
 		return new ResponseEntity<String>(path+saveFileName, HttpStatus.OK);
@@ -93,7 +92,7 @@ public class CommonController {
 	
 	
 	/**
-	 * 이미지 업로드시 오류염려 체킹
+	 * �씠誘몄� �뾽濡쒕뱶�떆 �삤瑜섏뿼�젮 泥댄궧
 	 * @param file
 	 * @param saveFile
 	 * @return
