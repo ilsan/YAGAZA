@@ -5,7 +5,7 @@
 <mapper namespace="com.spring.yagaza.web.repository.UserRepository">
 
 	<insert id="userAdd" parameterType="Map">
-		insert into members(id,name,password,email,regdate,`update`)
+		insert into members(id,name,password,email,regdate,upddate)
 		values (#{id}, #{name}, #{password},#{email}, now(), now())	
 		
 	</insert>

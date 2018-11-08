@@ -34,11 +34,11 @@ public class UserController {
 	@RequestMapping("/joinSuccess")
 	public String joinSuccess(User user) {
 		
+		ModelAndView mv = new ModelAndView();
+		
 		userService.Useradd(user);
 		
-		System.out.println("==========");
-		System.out.println(user);
-		System.out.println("==========");
+		mv.setViewName("redirect:join");
 		
 		return "index";
 	}
