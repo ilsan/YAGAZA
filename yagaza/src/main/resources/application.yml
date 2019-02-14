@@ -1,21 +1,33 @@
 spring:
-   datasource:
-      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      url: jdbc:log4jdbc:mysql://lisanstudy.c5sc7zsexlq4.ap-northeast-2.rds.amazonaws.com:3306/innodb
-      username: LisanStudy
-      password: 1san1san
-      
-   mvc:
-      static-path-pattern: /resources/**
-   thymeleaf:
+#  datasource:
+#    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#    url: jdbc:log4jdbc:mysql://lisanstudy.c5sc7zsexlq4.ap-northeast-2.rds.amazonaws.com:3306/innodb
+#    username: LisanStudy
+#    password: 1san1san
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    initialization-mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+  mvc:
+    static-path-pattern: /resources/**
+  thymeleaf:
     cache: false
 
-mybatis: 
-  type-aliases-package: com.spring.yagaza.web.domain
-  mapper-locations: classpath:mappers/*.xml
-  configuration:
-    default-statement-timeout: 120
-    map-underscore-to-camel-case: true
+#mybatis:
+#  type-aliases-package: com.spring.yagaza.web.domain
+#  mapper-locations: classpath:mappers/*.xml
+#  configuration:
+#    default-statement-timeout: 120
+#    map-underscore-to-camel-case: true
     
 
     

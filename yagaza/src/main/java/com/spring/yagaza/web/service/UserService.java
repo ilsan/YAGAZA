@@ -4,8 +4,8 @@ import com.spring.yagaza.web.domain.User;
 
 public interface UserService {
 	
-	public int Useradd(User user);
+	Long Useradd(User user);
 	
-	public int idCheck(String id);
+	Long idCheck(String id);
 
 }

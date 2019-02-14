@@ -2,15 +2,17 @@ package com.spring.yagaza.web.repository;
 
 import java.util.Map;
 
+import com.spring.yagaza.web.domain.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-@Mapper
-@Repository
-public interface UserRepository {
+public interface UserRepository extends JpaRepository<User, Long> {
 	
-	public int userAdd(Map<String, Object> map);
-	
-	public int idCheck(String id);
+	//int userAdd(Map<String, Object> map);
+
+	@Query(value = "SELECT u FROM User u WHERE u.userId = :id")
+	User idCheck(String id);
 
 }

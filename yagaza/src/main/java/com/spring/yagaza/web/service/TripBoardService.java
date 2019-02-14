@@ -17,6 +17,6 @@ public interface TripBoardService {
 	 * @param tripBoardNo
 	 * @return
 	 */
-	TripBoard findByBoardDetail(String tripBoardNo);
+	TripBoard findByBoardDetail(Long tripBoardNo);
 
 }
