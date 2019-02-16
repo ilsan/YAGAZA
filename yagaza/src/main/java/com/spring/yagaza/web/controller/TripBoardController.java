@@ -27,10 +27,10 @@ public class TripBoardController {
 	}
 	
 	@RequestMapping("/board/view")
-	public String view(Model model, HttpServletRequest req){
+	public String view(Model model, Long boardId){
 		logger.info("[welcome : /board/view ]");
-		String tripBoardNo = req.getParameter("tripBoardNo");
-		model.addAttribute("tripBoardDetail", tripBoardService.findByBoardDetail(tripBoardNo));
+		//String tripBoardNo = req.getParameter("tripBoardNo");
+		model.addAttribute("tripBoardDetail", tripBoardService.findByBoardDetail(boardId));
 		return "board/tripBoardView";
 	}
 	

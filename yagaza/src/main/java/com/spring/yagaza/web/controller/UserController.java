@@ -44,14 +44,13 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("idcheck")
-	public void idcheck(String userId, HttpServletResponse respornse) throws IOException {
+	@RequestMapping("idCheck")
+	public void idcheck(String id, HttpServletResponse respornse) throws IOException {
     	System.out.println("탔냐~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    	int result = userService.idCheck(userId);
+    	Long result = userService.idCheck(id);
     	PrintWriter out = respornse.getWriter();
     	System.out.println("결과  : ~~~~~~~~~~~~~~~~~ "  + result);
     	out.println(result);
-		
 	}
 	
 }

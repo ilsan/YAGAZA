@@ -4,6 +4,7 @@ import com.spring.yagaza.web.domain.ImgFile;
 import com.spring.yagaza.web.repository.FileRepository;
 import com.spring.yagaza.web.service.FileService;
 import com.spring.yagaza.web.util.FileUploadUtil;
+import javafx.util.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -14,12 +15,16 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 @Service
 public class FileServiceImpl implements FileService {
 
-    @Autowired
     private FileRepository fileRepository;
+
+    public FileServiceImpl(FileRepository fileRepository) {
+        this.fileRepository = fileRepository;
+    }
 
     public ImgFile store(MultipartFile file) throws Exception {
 
@@ -41,25 +46,24 @@ public class FileServiceImpl implements FileService {
 
             //Resource resource = loadAsResource(saveFileName);
 
-            ImgFile saveFile = new ImgFile();
-            saveFile.setFileSaveNm(saveFileName);
-            saveFile.setFileOrgNm(file.getOriginalFilename());
-            saveFile.setContentType(file.getContentType());
-            saveFile.setFileDir(rootLocation.toString().replace(File.separatorChar, '/'));
-            saveFile.setFileSize(resource.contentLength());
-            saveFile.setFileCategory("1");
-            //saveFile.setRegDate(new Date());
-            fileRepository.saveFile(saveFile);
-
-            return saveFile;
+            return fileRepository.save(
+                    ImgFile.builder()
+                            .fileSaveNm(saveFileName)
+                            .fileOrgNm(file.getOriginalFilename())
+                            .contentType(file.getContentType())
+                            .fileDir(rootLocation.toString().replace(File.separatorChar, '/'))
+                            .fileSize(resource.contentLength())
+                            .fileCategory("1")
+                            .regDate(LocalDateTime.now())
+                            .build()
+                    );
         } catch (IOException e) {
             throw new Exception("Failed to store file " + file.getOriginalFilename(), e);
         }
     }
 
     @Override
-    public ImgFile load(int id) throws Exception {
-        ImgFile file = fileRepository.findByFileNo(id);
-        return file;
+    public ImgFile load(Long id) {
+        return fileRepository.getOne(id);
     }
 }

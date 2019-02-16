@@ -1,17 +1,46 @@
 package com.spring.yagaza.web.domain;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "img_file")
+@Builder
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 public class ImgFile {
-	private int fileNo;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long fileNo;
+
+	@Column(nullable = false)
 	private String fileOrgNm;
+
+	@Column(nullable = false)
 	private String fileSaveNm;
+
+	@Column(nullable = false)
 	private String fileDir;
+
+	@Column(nullable = false)
 	private String contentType;
-	private long fileSize;
-	private String fileExt;
+
+	@Column(nullable = false)
+	private Long fileSize;
+
+	@Column(nullable = false)
 	private String fileCategory;
-	private String regDate;
+
+	@ManyToOne
+	@JoinColumn(name = "board_id")
+	private TripBoard tripBoard;
+
+	@Column
+	private LocalDateTime regDate;
+
+	@Column
 	private String memo;
 }

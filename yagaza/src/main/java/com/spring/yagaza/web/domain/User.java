@@ -1,14 +1,29 @@
 package com.spring.yagaza.web.domain;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
+@Builder
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 public class User {
-	
-	private int no;
-	private String email;
-	private String password;
-	private String name;
-	private String id;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(nullable = false)
+	private String name;
+
+	@Column(nullable = false)
+	private String email;
+
+	@Column(nullable = false)
+	private String userId;
+
+	@Column(nullable = false)
+	private String password;
 }

@@ -1,38 +1,51 @@
 package com.spring.yagaza.web.domain;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Table(name = "trip_board")
+@Builder
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 public class TripBoard {
 
-	/** 고유 일련번호 */
-	private int tripBoardNo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long tripBoardNo;	// 고유 일련번호
 
-	/** 제목 */
-	private String title;
+    @Column(nullable = false)
+	private String title;	// 제목
 
-	/** 내용 */
-	private String content;
+    @Lob
+	private String content; // 내용
 
-	/** 좋아요 수 */
-	private int likeCnt;
+    @Column(nullable = false)
+	private int likeCnt;    // 좋아요 수
 
-	/** 조회 수 */
-	private int hitCnt;
+	@Column(nullable = false)
+	private int hitCnt;     // 조회 수
 
-	/** 사용여부 ( default = 'Y' */
-	private String useYn;
-	
-	/** 등록자 */
-	private Integer regUser;
+	@Column(nullable = false)
+	private String useYn;   // 사용여부 ( default = 'Y'
 
-	/** 등록일자 ( default : cuurrent date ) */
-	private String regDate;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+	private User regUser;    // 등록자
 
-	/** 수정자 */
-	private Integer updUser;
+    @OneToMany(mappedBy = "tripBoard", cascade = CascadeType.ALL)
+    private List<ImgFile> imgFiles;
 
-	/** 수정일 ( update default : cuurrent date ) */
-	private String updDate;
-	
+    @Column
+	private LocalDateTime regDate; // 등록일자 ( default : cuurrent date )
+
+	// 수정자 (이건 뭔지 모르겠음)
+	//private Integer updUser;
+
+	@Column
+	private LocalDateTime updDate; // 수정일 ( update default : cuurrent date )
+
 }

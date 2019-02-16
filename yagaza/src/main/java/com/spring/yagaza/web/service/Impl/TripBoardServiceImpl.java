@@ -12,23 +12,26 @@ import com.spring.yagaza.web.service.TripBoardService;
 @Service
 public class TripBoardServiceImpl implements TripBoardService {
 
-	@Autowired
 	private TripBoardRepository boardRepository;
+
+	public TripBoardServiceImpl(TripBoardRepository boardRepository) {
+		this.boardRepository = boardRepository;
+	}
 
 	/**
 	 * 여행게시판 목록 조회하기
 	 */
 	@Override
 	public List<TripBoard> findByBoardList() {
-		return boardRepository.findByBoardList();
+		return boardRepository.findAll();
 	}
 
 	/**
 	 * 여행게시판 상세페이지
 	 */
 	@Override
-	public TripBoard findByBoardDetail(String tripBoardNo) {
-		return boardRepository.findByBoardDetail(tripBoardNo);
+	public TripBoard findByBoardDetail(Long tripBoardNo) {
+		return boardRepository.getOne(tripBoardNo);
 	}
 	
 

@@ -1,27 +1,21 @@
 package com.spring.yagaza.web.repository;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
-
 import com.spring.yagaza.web.domain.TripBoard;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Mapper
-@Repository
-public interface TripBoardRepository {
+public interface TripBoardRepository extends JpaRepository<TripBoard, Long> {
 	
 	/**
 	 * 여행게시판 목록 조회하기
 	 * @return
 	 */
-	public List<TripBoard> findByBoardList();
+	//Page<TripBoard> findByBoardList();
 
 	/**
 	 * 여행게시판 상세페이지
 	 * @param tripBoardNo
 	 * @return
 	 */
-	public TripBoard findByBoardDetail(String tripBoardNo);
+	//TripBoard findByBoardDetail(String tripBoardNo);
 
 }

@@ -65,29 +65,30 @@ public class CommonController {
         
         if(!(".jpg".equals(ext.toLowerCase()) || ".png".equals(ext.toLowerCase()) || ".jpeg".equals(ext.toLowerCase()))) {
             logger.error("[error] >> filename extension is not jpg, jpeg, png");
-            return new ResponseEntity<String>("", HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+            return new ResponseEntity<>("", HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
 		
         File saveFile = new File(realPath,saveFileName);
         HttpStatus uploadFileResult = saveFile(file,saveFile);
         if(!uploadFileResult.equals(HttpStatus.OK)) {
-            return new ResponseEntity<String>("", uploadFileResult);
+            return new ResponseEntity<>("", uploadFileResult);
         }else {
             logger.debug(">> DB INSERT <<");
-            
-            ImgFile imgVo = new ImgFile();
-            imgVo.setFileOrgNm(originalFileName);
-            imgVo.setFileSaveNm(saveFileName);
-            imgVo.setFileDir(path);
-            imgVo.setFileSize(file.getSize());
-            imgVo.setFileExt(ext);
-            imgVo.setFileCategory(categoryCode);
-            
+
+            ImgFile imgVo = ImgFile.builder()
+                    .fileOrgNm(originalFileName)
+                    .fileSaveNm(saveFileName)
+                    .fileDir(path)
+                    .fileSize(file.getSize())
+                    .contentType(file.getContentType())
+                    .fileCategory(categoryCode)
+                    .build();
+
 //            service.insertFileInfo(imgVo);
 // 			  TODO: �뵒鍮� insert 異붽�.
         }
 		
-		return new ResponseEntity<String>(path+saveFileName, HttpStatus.OK);
+		return new ResponseEntity<>(path+saveFileName, HttpStatus.OK);
 	}
 	
 	
@@ -126,7 +127,7 @@ public class CommonController {
 
     @GetMapping("/fileUpload/image/{fileId}")
     @ResponseBody
-    public ResponseEntity<?> serveFile(@PathVariable int fileId) {
+    public ResponseEntity<?> serveFile(@PathVariable Long fileId) {
         try {
             ImgFile uploadedFile = fileService.load(fileId);
             HttpHeaders headers = new HttpHeaders();
@@ -134,7 +135,7 @@ public class CommonController {
             Resource resource = new UrlResource(Paths.get(uploadedFile.getFileDir(), uploadedFile.getFileSaveNm()).toUri());
             String fileName = uploadedFile.getFileOrgNm();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
-            headers.setContentType(MediaType.valueOf(uploadedFile.getFileExt()));
+            headers.setContentType(MediaType.valueOf(uploadedFile.getContentType()));
            /* if (MediaUtils.containsImageMediaType(uploadedFile.getContentType())) {
                 headers.setContentType(MediaType.valueOf(uploadedFile.getContentType()));
             } else {
