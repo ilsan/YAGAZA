@@ -1,3 +1,7 @@
+.class
+/bin/
+yagaza/bin/main/com/spring/yagaza/web/domain/User.class
+
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
