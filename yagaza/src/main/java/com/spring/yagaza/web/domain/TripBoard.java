@@ -14,7 +14,8 @@ import java.util.List;
 public class TripBoard {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "trip_board_no")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long tripBoardNo;	// 고유 일련번호
 
     @Column(nullable = false)
@@ -23,29 +24,31 @@ public class TripBoard {
     @Lob
 	private String content; // 내용
 
-    @Column(nullable = false)
+    @Column(nullable = true)
 	private int likeCnt;    // 좋아요 수
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private int hitCnt;     // 조회 수
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String useYn;   // 사용여부 ( default = 'Y'
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-	private User regUser;    // 등록자
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//	private User regUser;    // 등록자
+	@Column(nullable = false)
+	private Long regUser;    // 등록자
 
     @OneToMany(mappedBy = "tripBoard", cascade = CascadeType.ALL)
     private List<ImgFile> imgFiles;
 
-    @Column
+//    @Column(columnDefinition = "date default sysdate")
 	private LocalDateTime regDate; // 등록일자 ( default : cuurrent date )
 
 	// 수정자 (이건 뭔지 모르겠음)
 	//private Integer updUser;
 
-	@Column
+//	@Column(columnDefinition = "date default sysdate")
 	private LocalDateTime updDate; // 수정일 ( update default : cuurrent date )
 
 }

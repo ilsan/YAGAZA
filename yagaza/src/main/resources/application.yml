@@ -1,22 +1,41 @@
-spring:
+#spring:
 #  datasource:
 #    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
 #    url: jdbc:log4jdbc:mysql://lisanstudy.c5sc7zsexlq4.ap-northeast-2.rds.amazonaws.com:3306/innodb
 #    username: LisanStudy
 #    password: 1san1san
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:testdb
+#    username: sa
+#    password:
+#    initialization-mode: always
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create-drop
+#    properties:
+#      hibernate:
+#        format_sql: true
+
+spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
-    initialization-mode: always
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://35.221.107.139:3306/kart
+    username: root
+    password: bae123$
+    
   jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: create-drop
-    properties:
       hibernate:
-        format_sql: true
+        ddl-auto: update
+      show-sql: true # 실행 되는 SQL문을 보여 줄지 설정
+      properties:  
+        hibernate.format_sql: true # 형식화된 sql 문을 보여준다. Beautifier 기능이라고 생각하면 된다
+        hibernate.enable_lazy_load_no_trans: true #Lazy Load 를 적용하기 위한 설정
+      database: mysql
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+      
+      
   mvc:
     static-path-pattern: /resources/**
   thymeleaf:

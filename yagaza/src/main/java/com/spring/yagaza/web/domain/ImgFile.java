@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class ImgFile {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long fileNo;
 
 	@Column(nullable = false)
@@ -35,7 +35,7 @@ public class ImgFile {
 	private String fileCategory;
 
 	@ManyToOne
-	@JoinColumn(name = "board_id")
+	@JoinColumn(name = "trip_board_no")
 	private TripBoard tripBoard;
 
 	@Column

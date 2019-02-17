@@ -1,7 +1,9 @@
 package com.spring.yagaza.web.service.Impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.type.LocalDateTimeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,19 @@ public class TripBoardServiceImpl implements TripBoardService {
 	@Override
 	public TripBoard findByBoardDetail(Long tripBoardNo) {
 		return boardRepository.getOne(tripBoardNo);
+	}
+
+	@Override
+	public void save(TripBoard tripBoard) {
+		
+		boardRepository.save(tripBoard.builder()
+				.title(tripBoard.getTitle())
+				.content(tripBoard.getContent())
+				.useYn("Y")
+				.regUser(1L)
+				.regDate(LocalDateTime.now())
+				.build()
+				);
 	}
 	
 

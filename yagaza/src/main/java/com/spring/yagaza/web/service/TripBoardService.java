@@ -19,4 +19,10 @@ public interface TripBoardService {
 	 */
 	TripBoard findByBoardDetail(Long tripBoardNo);
 
+	/**
+	 * 여행등록 테스트
+	 * @param tripBoard
+	 */
+	void save(TripBoard tripBoard);
+
 }
