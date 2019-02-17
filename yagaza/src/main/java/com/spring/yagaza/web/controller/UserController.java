@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.yagaza.web.domain.User;
@@ -18,29 +17,30 @@ import com.spring.yagaza.web.service.UserService;
 @Controller
 public class UserController {
 	
-	@Autowired
 	private UserService userService;
-	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String mainpage() {
+
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+
+	@GetMapping(value="/")
+	public String home() {
 		return "index";
 	}
 	
-	@RequestMapping("/join")
+	@GetMapping("/join")
 	public String join() {
 		return "join";
 	}
 	
-	@RequestMapping("/joinSuccess")
-	public String joinSuccess(User user) {
-		
-		ModelAndView mv = new ModelAndView();
+	@PostMapping("/join")
+	public String joinSuccess(User user, Model model) {
+
+		model.addAttribute("user", user);
 		
 		userService.Useradd(user);
 		
-		mv.setViewName("redirect:join");
-		
-		return "index";
+		return "redirect:/";
 	}
 	
 	@ResponseBody

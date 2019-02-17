@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
     <title>회원가입</title>
 
     <!-- Bootstrap -->
-   <link rel="stylesheet" href="resources/assets/css/bootstrap.css">
+   <link rel="stylesheet" href=" resources/assets/css/bootstrap.css">
     <!-- font awesome -->
     <link rel="stylesheet" href="resources/assets/css/join/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
     <!-- Custom style -->
@@ -60,7 +60,7 @@
           <h1>회원가입</h1>
         </div>
         <div class="col-md-6 col-md-offset-3">
-          <form action="joinSuccess" method="post" onsubmit="return join_check()">
+          <form action="joinSuccess" method="post" onsubmit="return false">
            <div class="form-group">
               <input type="text" class="form-control" name="name" id="name" placeholder="이름을 입력해 주세요" required maxlength="10">
             </div>
