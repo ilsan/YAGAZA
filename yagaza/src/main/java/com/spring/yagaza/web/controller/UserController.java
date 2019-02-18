@@ -34,23 +34,18 @@ public class UserController {
 	}
 	
 	@PostMapping("/join")
-	public String joinSuccess(User user, Model model) {
+	public String joinSuccess(User user) {
 
-		model.addAttribute("user", user);
-		
 		userService.Useradd(user);
 		
 		return "redirect:/";
 	}
 	
 	@ResponseBody
-	@RequestMapping("idCheck")
-	public void idcheck(String id, HttpServletResponse respornse) throws IOException {
-    	System.out.println("탔냐~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    	Long result = userService.idCheck(id);
-    	PrintWriter out = respornse.getWriter();
-    	System.out.println("결과  : ~~~~~~~~~~~~~~~~~ "  + result);
-    	out.println(result);
+	@GetMapping("/idCheck")
+	public String idCheck(String id) {
+    	userService.idCheck(id);
+		return "잘된다";
 	}
 	
 }

@@ -1,4 +1,5 @@
 <!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,99 +8,119 @@
     <title>회원가입</title>
 
     <!-- Bootstrap -->
-   <link rel="stylesheet" href=" resources/assets/css/bootstrap.css">
-    <!-- font awesome -->
-    <link rel="stylesheet" href="resources/assets/css/join/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
-    <!-- Custom style -->
-    <link rel="stylesheet" href="resources/assets/css/style.css">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <script src="webjars/jquery/3.1.1/dist/jquery.min.js"></script>
+    <!--<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script src="resources/assets/js/jquery.min.js"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
 
- 	$(document).ready(function() {
-		//중복체크
-		$("#submit").click(function() {
-			var idresult = $("#userId").val();
-			var name = $("#name").val();
-			var passresult = $("#password").val();
-			var userPwdCheck = $("#userPwdCheck").val(); //password확인값
-		
-			var checked = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{3,}$/;  //닉네임 조건문: 영문,숫자포함 3글자 이상
-			// 비밀번호 조건문 : 영문,숫자,특문포함, 6글자 이상
-			var passchecked = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/; 
-			
-			if(!checked.test(idresult)) {
-				alert("ID는 영문으로 시작하며,숫자를포함, 3글자 이상이여야 합니다.");
-				$(".id").focus();
-				return false;
-			}else if(!passchecked.test(passresult)){ // 비밀번호가 조건에 맞지 않으면
-				alert("비밀번호는 영문,숫자,특문 포함 6글자 이상입니다.")
-				$(".password").focus(); //비밀번호 입력공간에 포커싱
-				return false; //form submit 막음 
-			}else if(passresult != userPwdCheck){
-				alert("비밀번호가 일치하지 않습니다.");
-				$(".userPwdCheck").focus();
-				return false;
-			}
-		})
-	});
-	
-		
-	</script>
+        $(document).ready(function() {
+            $('#idCheck').click(function () {
+                const id = $('#userId').val();
+
+                $.ajax({
+                    url : "/idCheck",
+                    type : "GET",
+                    data : {id : id},
+                    success : function (data) {
+                        alert(data);
+                    },
+                    error : function (response) {
+                        alert(response.responseText);
+                    }
+                })
+            });
+        });
+
+
+
+        /*$(document).ready(function() {
+           //중복체크
+           $("#submit").click(function() {
+               var idresult = $("#userId").val();
+               var name = $("#name").val();
+               var passresult = $("#password").val();
+               var userPwdCheck = $("#userPwdCheck").val(); //password확인값
+
+               var checked = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{3,}$/;  //닉네임 조건문: 영문,숫자포함 3글자 이상
+               // 비밀번호 조건문 : 영문,숫자,특문포함, 6글자 이상
+               var passchecked = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;
+
+               if(!checked.test(idresult)) {
+                   alert("ID는 영문으로 시작하며,숫자를포함, 3글자 이상이여야 합니다.");
+                   $(".id").focus();
+                   return false;
+               }else if(!passchecked.test(passresult)){ // 비밀번호가 조건에 맞지 않으면
+                   alert("비밀번호는 영문,숫자,특문 포함 6글자 이상입니다.")
+                   $(".password").focus(); //비밀번호 입력공간에 포커싱
+                   return false; //form submit 막음
+               }else if(passresult != userPwdCheck){
+                   alert("비밀번호가 일치하지 않습니다.");
+                   $(".userPwdCheck").focus();
+                   return false;
+               }
+           })
+       });*/
+
+
+    </script>
 </head>
 
-      <article class="container">
-        <div class="page-header">
-          <h1>회원가입</h1>
-        </div>
-        <div class="col-md-6 col-md-offset-3">
-          <form action="joinSuccess" method="post" onsubmit="return false">
-           <div class="form-group">
-              <input type="text" class="form-control" name="name" id="name" placeholder="이름을 입력해 주세요" required maxlength="10">
-            </div>
-           <div class="form-group">
-              <input type="text" class="form-control" name="userId" id="userId" placeholder="ID를 입력해 주세요">
-              <span class="input-group-btn">
-                    <button class="btn btn-success" id="idCheck" onClick="idCheck">ID중복체크<i class="fa fa-mail-forward spaceLeft"></i></button>
-              </span>
+<article class="container">
+    <div class="page-header">
+        <h1>회원가입</h1>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+        <form onsubmit="return false">
+            <div class="form-group">
+                <input type="text" class="input-lg form-control" name="name" id="name" placeholder="이름을 입력해 주세요"
+                       required
+                       maxlength="10">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
+                <div class="input-group">
+                    <input type="text" id="userId" class="input-lg form-control" placeholder="ID를 입력해 주세요">
+                    <span class="input-group-btn">
+                        <button class="btn btn-success btn-lg" id="idCheck" type="button">중복체크</button>
+                    </span>
+                </div>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" name="userPwdCheck" id="userPwdCheck" placeholder="비밀번호 확인">
-              <p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
+                <input type="password" class="input-lg form-control" name="password" id="password" placeholder="비밀번호">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" name="email" id="email" placeholder="이메일 주소">
+                <input type="password" class="input-lg form-control" name="userPwdCheck" id="userPwdCheck"
+                       placeholder="비밀번호 확인">
+                <p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
             </div>
-<!--             <div class="form-group">
-                <label>약관 동의</label>
-              <div data-toggle="buttons">
-              <label class="btn btn-primary active">
-                  <span class="fa fa-check"></span>
-                  <input id="agree" type="checkbox" autocomplete="off" checked>
-              </label>
-              <a href="#">이용약관</a>에 동의합니다.
-              </div>
-            </div> -->
+            <div class="form-group">
+                <input type="email" class="input-lg form-control" name="email" id="email" placeholder="이메일 주소">
+            </div>
+            <!--             <div class="form-group">
+                            <label>약관 동의</label>
+                          <div data-toggle="buttons">
+                          <label class="btn btn-primary active">
+                              <span class="fa fa-check"></span>
+                              <input id="agree" type="checkbox" autocomplete="off" checked>
+                          </label>
+                          <a href="#">이용약관</a>에 동의합니다.
+                          </div>
+                        </div> -->
             <div class="form-group text-center">
-              <button type="submit" class="btn btn-info" id="submit"><i class="fa fa-check spaceLeft">회원가입</i></button>
-              <button type="button" class="btn btn-warning" onclick="history.back()"><i class="fa fa-times spaceLeft">가입취소</i></button>
+                <button type="submit" class="btn btn-info" id="submit"><i class="fa fa-check spaceLeft">회원가입</i>
+                </button>
+                <button type="button" class="btn btn-warning" onclick="history.back()"><i class="fa fa-times spaceLeft">가입취소</i>
+                </button>
             </div>
-          </form>
-        </div>
+        </form>
+    </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="resources/assets/js/jquery.min.js"></script>
-  </body>
+
+</article>
 </html>

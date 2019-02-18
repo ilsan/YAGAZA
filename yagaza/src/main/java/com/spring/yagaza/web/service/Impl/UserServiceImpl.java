@@ -37,8 +37,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Long idCheck(String id) {
-		
-		return Optional.of(userRepository.idCheck(id).getId()).orElse(0L);
-	}
 
+		return Optional.ofNullable(userRepository.idCheck(id).getId()).orElse(0L);
+	}
 }
