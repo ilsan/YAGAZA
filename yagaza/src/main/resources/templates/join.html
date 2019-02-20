@@ -20,6 +20,8 @@
 
     <script type="text/javascript">
 
+        let isDuplicate = true;
+
         $(document).ready(function() {
             $('#idCheck').click(function () {
                 const id = $('#userId').val();
@@ -29,7 +31,7 @@
                     type : "GET",
                     data : {id : id},
                     success : function (data) {
-                        alert(data);
+                        isDuplicate = data;
                     },
                     error : function (response) {
                         alert(response.responseText);
@@ -37,8 +39,6 @@
                 })
             });
         });
-
-
 
         /*$(document).ready(function() {
            //중복체크

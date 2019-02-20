@@ -20,24 +20,11 @@ public class UserServiceImpl implements UserService{
 		this.userRepository = userRepository;
 	}
 	
-	public Long Useradd(User user) {
-		
-		/*Map<String, Object> map = new HashMap<String,Object>();
-		
-		map.put("name", user.getName());
-		map.put("id", user.getId());
-		map.put("password", user.getPassword());
-		map.put("email", user.getEmail());
-		
-		System.out.println("==========");
-		System.out.println(map);
-		System.out.println("==========");*/
-
-		return userRepository.save(user).getId();
+	public String userAdd(User user) {
+		return userRepository.save(user) != null ? "성공" : "실패";
 	}
-	
-	public Long idCheck(String id) {
 
-		return Optional.ofNullable(userRepository.idCheck(id).getId()).orElse(0L);
+	public String idCheck(String id) {
+		return userRepository.idCheck(id) != null ? "true" : "false";
 	}
 }

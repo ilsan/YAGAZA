@@ -1,18 +1,12 @@
 package com.spring.yagaza.web.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.spring.yagaza.web.domain.User;
 import com.spring.yagaza.web.service.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -34,18 +28,16 @@ public class UserController {
 	}
 	
 	@PostMapping("/join")
-	public String joinSuccess(User user) {
+	public String join(User user) {
 
-		userService.Useradd(user);
+		userService.userAdd(user);
 		
 		return "redirect:/";
 	}
 	
 	@ResponseBody
 	@GetMapping("/idCheck")
-	public String idCheck(String id) {
-    	userService.idCheck(id);
-		return "잘된다";
+	public ResponseEntity<?> idCheck(String id) {
+		return ResponseEntity.ok(userService.idCheck(id));
 	}
-	
 }
