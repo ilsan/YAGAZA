@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public String userAdd(User user) {
-		return userRepository.save(user) != null ? "성공" : "실패";
+		return userRepository.save(user) != null ? "success" : "fail";
 	}
 
 	public String idCheck(String id) {
