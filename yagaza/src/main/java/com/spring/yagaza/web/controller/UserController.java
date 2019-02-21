@@ -1,56 +1,45 @@
 package com.spring.yagaza.web.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.spring.yagaza.web.domain.User;
 import com.spring.yagaza.web.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
 	
-	@Autowired
 	private UserService userService;
-	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String mainpage() {
-		return "index";
+
+	public UserController(UserService userService) {
+		this.userService = userService;
 	}
 	
-	@RequestMapping("/join")
+	@GetMapping("/join")
 	public String join() {
 		return "join";
 	}
-	
-	@RequestMapping("/joinSuccess")
-	public String joinSuccess(User user) {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		userService.Useradd(user);
-		
-		mv.setViewName("redirect:join");
-		
-		return "index";
+
+	@ResponseBody
+	@PostMapping("/join")
+	public ResponseEntity<?> join(@Valid User user, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()){
+			return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
+		}
+
+		return ResponseEntity.ok(userService.userAdd(user));
 	}
 	
 	@ResponseBody
-	@RequestMapping("idCheck")
-	public void idcheck(String id, HttpServletResponse respornse) throws IOException {
-    	System.out.println("탔냐~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    	Long result = userService.idCheck(id);
-    	PrintWriter out = respornse.getWriter();
-    	System.out.println("결과  : ~~~~~~~~~~~~~~~~~ "  + result);
-    	out.println(result);
+	@GetMapping("/idCheck")
+	public ResponseEntity<?> idCheck(String id) {
+		return ResponseEntity.ok(userService.idCheck(id));
 	}
-	
 }
