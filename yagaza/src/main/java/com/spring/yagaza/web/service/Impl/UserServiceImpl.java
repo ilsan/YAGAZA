@@ -29,6 +29,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public String idCheck(String id) {
-		return userRepository.findByUserId(id) != null ? "사용할 수 없는 아이디 입니다." : "사용할 수 있는 아이디 입니다.";
+		if (userRepository.findByUserId(id) != null) {
+			throw new RuntimeException("사용할 수 없는 아이디 입니다.");
+		}
+		return "사용할 수 있는 아이디 입니다.";
 	}
 }

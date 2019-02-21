@@ -35,7 +35,7 @@
                     type : "GET",
                     success : function (data) {
                         console.log(data);
-                        isDuplicate = data;
+                        isDuplicate = false;
                     },
                     error : function (response) {
                         console.log(response.responseText);
@@ -64,6 +64,7 @@
                         console.log(data);
                     },
                     error : function (response) {
+                        isDuplicate = true;
                         console.log(response.responseText);
                         //alert(response.responseText);
                     }
