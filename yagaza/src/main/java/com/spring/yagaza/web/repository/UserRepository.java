@@ -9,7 +9,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	//int userAdd(Map<String, Object> map);
 
-	@Query(value = "SELECT u FROM User u WHERE u.userId = :id")
-	User idCheck(@Param("id") String id);
+
+	User findByUserId(String userId);
 
 }

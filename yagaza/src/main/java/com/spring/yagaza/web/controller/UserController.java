@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,10 +38,11 @@ public class UserController {
 
 		return ResponseEntity.ok(userService.userAdd(user));
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/idCheck")
-	public ResponseEntity<?> idCheck(String id) {
-		return ResponseEntity.ok(userService.idCheck(id));
+	public ResponseEntity<?> idCheck(String userId) {
+		System.out.println("userId : " + userId);
+		return ResponseEntity.ok(userService.idCheck(userId));
 	}
 }
