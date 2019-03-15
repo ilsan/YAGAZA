@@ -43,6 +43,11 @@ public class UserController {
 	@GetMapping("/idCheck")
 	public ResponseEntity<?> idCheck(String userId) {
 		System.out.println("userId : " + userId);
-		return ResponseEntity.ok(userService.idCheck(userId));
+
+		try {
+			return ResponseEntity.ok(userService.idCheck(userId));
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 }

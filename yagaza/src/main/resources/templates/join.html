@@ -45,11 +45,10 @@
             });
 
             $('#submit').click(function () {
-                //console.log($('form').serializeObject());
                 console.log(isDuplicate);
 
                 if (isDuplicate) {
-                    alert("중복 검사해랑");
+                    alert("아이디 중복검사를 해야합니다.");
                     return;
                 }
 
@@ -62,6 +61,7 @@
                     data : jsonData,
                     success : function (data) {
                         console.log(data);
+                        location.href = '/';
                     },
                     error : function (response) {
                         isDuplicate = true;
@@ -99,7 +99,6 @@
                }
            })
        });*/
-
     </script>
 </head>
 
@@ -146,12 +145,10 @@
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-info" id="submit"><i class="fa fa-check spaceLeft">회원가입</i>
                 </button>
-                <button type="button" class="btn btn-warning" onclick="history.back()"><i class="fa fa-times spaceLeft">가입취소</i>
+                <button type="button" class="btn btn-warning" onclick="location.href = '/'"><i class="fa fa-times spaceLeft">가입취소</i>
                 </button>
             </div>
         </form>
     </div>
-
-
 </article>
 </html>
