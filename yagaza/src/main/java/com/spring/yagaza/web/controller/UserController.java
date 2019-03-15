@@ -5,6 +5,7 @@ import com.spring.yagaza.web.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,12 @@ public class UserController {
 
 	public UserController(UserService userService) {
 		this.userService = userService;
+	}
+
+	@PostMapping
+	public String login(@ModelAttribute User user, Model model){
+
+		return "redirect:/";
 	}
 	
 	@GetMapping("/join")
